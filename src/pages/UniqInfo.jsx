@@ -57,7 +57,7 @@ export function UniqInfo() {
   useEffect(() => {
     getUniqInfoFormApi();
     getSimilarInfo();
-  }, []);
+  }, [filmID]);
   console.log(getSimilarFromInfo);
 
   if (loading) {

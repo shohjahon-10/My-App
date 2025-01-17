@@ -19,12 +19,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDebounce } from "../hook/useDebounce";
+import { useNavigate } from "react-router-dom";
 
 export function SearchModal({ isOpen, setOpenToggle }) {
   const [searchedValue, setSearchedValue] = useState("");
   const [movieData, setMovieData] = useState([]);
   const [loading, setLoading] = useState(false); // Loading holati
   const { debouncedValue } = useDebounce(searchedValue);
+  const navigate = useNavigate();
 
   const fetchSearchData = async () => {
     if (!searchedValue.trim()) {
@@ -114,6 +116,14 @@ export function SearchModal({ isOpen, setOpenToggle }) {
                     transform: "translateY(-7px)",
                     transition: "0.2s",
                   }}
+                  onClick={() =>
+                    navigate(
+                      `/films/${item?.title
+                        ?.toLowerCase()
+                        .replace(/ /g, "-")}-${item?.id}
+                      }`
+                    )
+                  }
                 >
                   <Box
                     width="300px"
